@@ -17,7 +17,6 @@ st.markdown(
 
 st.set_page_config(
     page_title="The Caregiver Circle",
-    layout=wide
 )
 
 st.title("Our Discussion Board")
