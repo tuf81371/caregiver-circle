@@ -135,3 +135,18 @@ if discussions:
         st.warning("No discussions yet. Be the first to post!")
 
 conn.close()
+
+
+
+st.html(
+    """
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MBXPFR25QW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MBXPFR25QW');
+    </script>
+    """,
+    unsafe_allow_javascript=True,
+)
