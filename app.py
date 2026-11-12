@@ -21,7 +21,7 @@ st.set_page_config(
 
 st.title("Community")
 
-st.write("A place for people to share, connect, and have conversations about caring for people you love and in need.")
+st.write("You might not realize how exhausted or isolate you have become. Whatever you need today, there's a place for you here.")
 
 ## connect to a database
 conn = sqlite3.connect("discussion_board.db")
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS comments (
 conn.commit()
 
 # new Discussion section
-st.subheader("Start A Discussion")
+st.subheader("A place for people to share, connect, and have conversations about caring for people you love and in need.")
 
 title = st.selectbox(
     "Pick a question to answer",
