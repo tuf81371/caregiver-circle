@@ -89,7 +89,7 @@ ORDER BY id DESC
 discussions = cursor.fetchall()
 
 if discussions:
-    for discussion_id, title, post, created_at in discussions:
+    for title, post, created_at in discussions:
 
         with st.container(border=TRUE):
 
