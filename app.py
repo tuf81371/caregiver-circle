@@ -61,7 +61,8 @@ title = st.selectbox(
         "What do you wish others understood?",
         "Is everything ok?"
     ]
-)post = st.text_area("What is on your mind?")
+)
+post = st.text_area("What is on your mind?")
 
 if st.button("Publish"):
     if title.strip() and post.strip():
