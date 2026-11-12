@@ -52,8 +52,16 @@ conn.commit()
 # new Discussion section
 st.subheader("Start A Discussion")
 
-title = st.text_input("Discussion Title")
-post = st.text_area("What is on your mind?")
+title = st.selectbox(
+    "Pick a question to answer",
+    [
+        "What activities help you relieve stress?",
+        "What has been weighing on you lately?",
+        "What's one daily task you wish were easier?",
+        "What do you wish others understood?",
+        "Is everything ok?"
+    ]
+)post = st.text_area("What is on your mind?")
 
 if st.button("Publish"):
     if title.strip() and post.strip():
