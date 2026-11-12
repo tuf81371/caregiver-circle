@@ -21,7 +21,7 @@ st.set_page_config(
 
 st.title("Community")
 
-st.write("You might not realize how exhausted or isolate you have become. Whatever you need today, there's a place for you here.")
+st.write("You might not realize how exhausted or isolated you have become. Whatever you need today, there's a place for you here.")
 
 ## connect to a database
 conn = sqlite3.connect("discussion_board.db")
