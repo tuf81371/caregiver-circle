@@ -91,7 +91,7 @@ discussions = cursor.fetchall()
 if discussions:
     for title, post, created_at in discussions:
 
-        with st.container(border=TRUE):
+        with st.container(border=True):
 
             st.markdown(f"### {title}")
             st.write(post)
