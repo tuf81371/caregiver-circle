@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS comments (
 conn.commit()
 
 # new Discussion section
-st.subheader("A place for people to share, connect, and have conversations about caring for people you love and in need.")
+st.subheader("What's on your mind?")
 
 title = st.selectbox(
     "Pick a question to answer",
