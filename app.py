@@ -19,9 +19,9 @@ st.set_page_config(
     page_title="The Caregiver Circle",
 )
 
-st.title("Our Discussion Board")
+st.title("Community")
 
-st.write("A place for people to share, connect, and have conversation.")
+st.write("A place for people to share, connect, and have conversations about caring for people you love and in need.")
 
 ## connect to a database
 conn = sqlite3.connect("discussion_board.db")
