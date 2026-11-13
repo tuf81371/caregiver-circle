@@ -2,19 +2,6 @@
 import streamlit as st
 import sqlite3
 
-st.markdown(
-    """
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MBXPFR25QW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-MBXPFR25QW');
-    </script>
-    """,
-    unsafe_allow_html=True,
-)
-
 st.set_page_config(
     page_title="The Caregiver Circle",
     page_icon="🌿",
