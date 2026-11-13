@@ -41,11 +41,22 @@ CREATE TABLE IF NOT EXISTS discussions (
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS comments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
+    discussion_id INTEGER,
     post TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
+
+columns = [row[1] for row in cursor.execute(
+    "PRAGMA table_info(comments)"
+).fetchall()]
+
+if "discussion_id" not in columns:
+    cursor.execute("ALTER TABLE comments ADD COLUMN discussion_id INTEGER")
+
+if "comment" not in columns:
+    cursor.execute("ALTER TABLE comments ADD COLUMN comment TEXT")
+
 
 conn.commit()
 
@@ -77,11 +88,12 @@ if st.button("Publish"):
         st.warning("Please enter a title and description")
 
 # Recent discussion
+# Recent discussion
 st.divider()
 st.subheader("Recent Discussions")
 
 cursor.execute("""
-SELECT title, post, created_at
+SELECT id, title, post, created_at
 FROM discussions
 ORDER BY id DESC
 """)
@@ -89,7 +101,8 @@ ORDER BY id DESC
 discussions = cursor.fetchall()
 
 if discussions:
-    for title, post, created_at in discussions:
+
+    for discussion_id, title, post, created_at in discussions:
 
         with st.container(border=True):
 
@@ -102,43 +115,47 @@ if discussions:
             cursor.execute("""
             SELECT comment, created_at
             FROM comments
-            WHERE discussion_id = ? 
+            WHERE discussion_id = ?
             ORDER BY id ASC
             """, (discussion_id,))
 
             comments = cursor.fetchall()
 
-            if comments: 
+            if comments:
                 for comment, comment_date in comments:
                     st.write(comment)
                     st.caption(f"Commented: {comment_date}")
 
-            else: 
+            else:
                 st.write("No Comments Yet.")
 
-        ## Add a new comment 
+            # Add a new comment
 
-        with st.form(key=f"comment_from_{discussion_id}"):
+            with st.form(key=f"comment_form_{discussion_id}"):
 
-            new_comment - st.text_area(
-                "Write a comment",
-                key=f"comment_input_{discussion_id}"
-            )
+                new_comment = st.text_area(
+                    "Write a comment",
+                    key=f"comment_input_{discussion_id}"
+                )
 
-        submitted = st.form_submit_button("Add Comment")
+                submitted = st.form_submit_button("Add Comment")
 
-        if submitted: 
-            if new_comment.strip():
+                if submitted:
+                    if new_comment.strip():
 
-                    cursor.execute("""
-                    INSERT INTO comments (discussion_id, comment)
-                    VALUES (?, ?)
-                    """, (discussion_id, new_comment.strip()))
+                        cursor.execute("""
+                        INSERT INTO comments (discussion_id, comment)
+                        VALUES (?, ?)
+                        """, (discussion_id, new_comment.strip()))
 
-                    conn.commit()
-                    st.rerun()
-    else: 
-        st.warning("No discussions yet. Be the first to post!")
+                        conn.commit()
+                        st.rerun()
+
+                    else:
+                        st.warning("Please write a comment.")
+
+else:
+    st.warning("No discussions yet. Be the first to post!")
 
 conn.close()
 
