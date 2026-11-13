@@ -18,7 +18,6 @@ st.markdown(
 st.set_page_config(
     page_title="The Caregiver Circle",
     page_icon="🌿",
-    layout="wide"
 )
 
 st.title("Community")
