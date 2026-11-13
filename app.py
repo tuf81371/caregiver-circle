@@ -17,11 +17,13 @@ st.markdown(
 
 st.set_page_config(
     page_title="The Caregiver Circle",
+    page_icon="🌿",
+    layout="wide"
 )
 
 st.title("Community")
 
-st.write("You might not realize how exhausted or isolated you have become. Whatever you need today, there's a place for you here.")
+st.write("Share what's on your mind. Pick a question below and answer it anonymously!")
 
 ## connect to a database
 conn = sqlite3.connect("discussion_board.db")
