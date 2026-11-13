@@ -24,13 +24,12 @@ CREATE TABLE IF NOT EXISTS discussions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
-
-## Create comments section
+## Create comments
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS comments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     discussion_id INTEGER,
-    post TEXT,
+    comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
@@ -81,10 +80,11 @@ st.divider()
 st.subheader("Recent Discussions")
 
 cursor.execute("""
-SELECT id, title, post, created_at
-FROM discussions
-ORDER BY id DESC
-""")
+SELECT comment, created_at
+FROM comments
+WHERE discussion_id = ?
+ORDER BY id ASC
+""", (discussion_id,))
 
 discussions = cursor.fetchall()
 
