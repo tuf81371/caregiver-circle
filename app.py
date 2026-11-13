@@ -80,11 +80,10 @@ st.divider()
 st.subheader("Recent Discussions")
 
 cursor.execute("""
-SELECT comment, created_at
-FROM comments
-WHERE discussion_id = ?
-ORDER BY id ASC
-""", (discussion_id,))
+SELECT id, title, post, created_at
+FROM discussions
+ORDER BY id DESC
+""")
 
 discussions = cursor.fetchall()
 
